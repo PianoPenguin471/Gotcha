@@ -8,8 +8,9 @@ export default class App extends Component {
       currentScreen: 'Join'
     }
 
-    joinRoom(userName, daCode) {
+    joinRoom = (userName, daCode) => {
       console.log(`${userName} is joining room ${daCode}`);
+      this.setState({currentScreen: "Question"});
     }
 
     createRoom(userName) {
@@ -21,7 +22,7 @@ export default class App extends Component {
         case "Join":
           return(<JoinGameScreen onJoin={this.joinRoom} onCreate={this.createRoom}/>);
         case "Question":
-          return(<QuestionScreen/>)
+          return(<QuestionScreen name="Jimothy" question="If xxx were a superhero, what would be their Kryptonite?"/>)
       }
     }
 }

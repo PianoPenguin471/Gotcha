@@ -3,27 +3,22 @@ import { View, Text, TextInput, TouchableOpacity , StyleSheet} from 'react-nativ
 
 export default class QuestionScreen extends React.Component {
   state = {
-    name: 'Jimothy',
-    question: 'If xxx were a superhero, what would be their Kryptonite?'
+    answer: ''
   }
-  saveCode = (daCode) => {this.setState({code: daCode})}
-  saveName = (userName) => {this.setState({name: userName});}
+  saveAnswer = (providedAnswer) => {this.setState({answer: providedAnswer});}
   render() {
     return (
       <View style={styles.maincontainer}>
         <Text style={styles.title}>Gotcha!</Text>
         <View style={styles.container}>
-          <View style={{flexDirection:"row"}}>
-            <Text  style = {styles.label}>Name:</Text>
+            <Text  style = {styles.label}>{this.props.question.replace("xxx", this.props.name)}</Text>
             <TextInput style = {styles.input}
               underlineColorAndroid = "transparent"
                 autoCapitalize = "none"
-                onChangeText = {this.saveName}
+                onChangeText = {this.saveAnswer}
             />
-          </View>
 
-
-          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onJoin(this.state.name, this.state.code)}>
+          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.answer(this.state.answer)}>
             <Text style = {styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
         </View>
@@ -39,14 +34,12 @@ const styles = StyleSheet.create({
   },
 
   input:{
-      borderWidth:1,
-      marginBottom:10,
-      marginRight: 10,
-      padding:10,
-      width:'100%',
-      borderRadius:10,
-      justifyContent:'flex-start',
-      flex:1,
+      borderWidth: 1,
+      marginVertical: 10,
+      marginHorizontal:'5%',
+      padding: 10,
+      width:'90%',
+      borderRadius :10,
       backgroundColor: '#ffffff'
   },
   title: {
@@ -58,7 +51,7 @@ const styles = StyleSheet.create({
       fontWeight:'bold',
   },
   container: {
-      marginTop: 40,
+    marginTop: 40,
   },
   submitButton: {
     backgroundColor: '#ff6666',
@@ -69,7 +62,6 @@ const styles = StyleSheet.create({
   submitButtonText:{
     textAlign: "center",
     color: 'white',
-   // fontWeight:"bold",
     fontSize: 18,
   },
   label:{
