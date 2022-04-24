@@ -3,8 +3,8 @@ import { View, Text, TextInput, TouchableOpacity , StyleSheet} from 'react-nativ
 
 export default class QuestionScreen extends React.Component {
   state = {
-    name: '',
-    code: '5454561321'
+    name: 'Jimothy',
+    question: 'If xxx were a superhero, what would be their Kryptonite?'
   }
   saveCode = (daCode) => {this.setState({code: daCode})}
   saveName = (userName) => {this.setState({name: userName});}
@@ -22,20 +22,9 @@ export default class QuestionScreen extends React.Component {
             />
           </View>
 
-          <View style={{flexDirection:"row"}}>
-          <Text  style = {styles.label}>Code:</Text>
-          <TextInput style = {styles.input}
-            underlineColorAndroid = "transparent"
-            autoCapitalize = "none"
-            onChangeText = {this.saveCode}
-          />
-          </View>
 
           <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onJoin(this.state.name, this.state.code)}>
-            <Text style = {styles.submitButtonText}> Join </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onCreate(this.state.name)}>
-            <Text style = {styles.submitButtonText}> Create </Text>
+            <Text style = {styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
         </View>
       </View>
