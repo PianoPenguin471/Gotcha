@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import JoinGameScreen from "./JoinGameScreen";
+import QuestionScreen from "./QuestionScreen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+export default class App extends Component {
+    state = {
+      currentScreen: 'Join'
+    }
+
+    joinRoom(userName, daCode) {
+      console.log(`${userName} is joining room ${daCode}`);
+    }
+
+    createRoom(userName) {
+      console.log(`${userName} is creating a room`);
+    }
+
+    render() {
+      switch (this.state.currentScreen) {
+        case "Join":
+          return(<JoinGameScreen onJoin={this.joinRoom} onCreate={this.createRoom}/>);
+        case "Question":
+          return(<QuestionScreen/>)
+      }
+    }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
