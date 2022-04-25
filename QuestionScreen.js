@@ -1,24 +1,33 @@
 import React from "react";
-import { View, Text, TextInput, TouchableOpacity , StyleSheet} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default class QuestionScreen extends React.Component {
+  constructor(props) {
+    super();
+    this.name=props.name || "Jimothy";
+    this.onSubmit = props.onSubmit
+  }
   state = {
     answer: ''
   }
+  componentDidMount() {
+    alert("Mounting")
+    // Fetch question & name here
+  }
+
   saveAnswer = (providedAnswer) => {this.setState({answer: providedAnswer});}
   render() {
     return (
       <View style={styles.maincontainer}>
         <Text style={styles.title}>Gotcha!</Text>
         <View style={styles.container}>
-            <Text  style = {styles.label}>{this.props.question.replace("xxx", this.props.name)}</Text>
+            <Text  style = {styles.label}>{this.props.question.replace("xxx", this.name)}</Text>
             <TextInput style = {styles.input}
               underlineColorAndroid = "transparent"
                 autoCapitalize = "none"
-                onChangeText = {this.saveAnswer}
-            />
+                onChangeText = {this.saveAnswer}/>
 
-          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.answer(this.state.answer)}>
+          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onAnswer(this.state.answer)}>
             <Text style = {styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
         </View>
