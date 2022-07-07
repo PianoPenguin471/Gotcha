@@ -18,12 +18,12 @@ def get_json_from_file():
 file_data = get_json_from_file()
 
 @app.route('/')
-@cross_origin(origin='*')
+@cross_origin()
 def index():
     return 'Congrats, you found the server!'
 
 @app.route('/create_room/<user_name>')
-@cross_origin(origin='*')
+@cross_origin()
 def create_room(user_name: str):
     # Generate random room code
     id = random.randint(1,9576)
@@ -41,7 +41,7 @@ def create_room(user_name: str):
     return str(id)
 
 @app.route('/join_room/<user_name>/<room_code>')
-@cross_origin(origin='*')
+@cross_origin()
 def join_room(user_name: str, room_code:str):
     # Add player to players list if not already added
     if user_name not in file_data['rooms'][room_code]['players']:
@@ -51,12 +51,12 @@ def join_room(user_name: str, room_code:str):
     write_json_to_file(file_data)
 
     # Return player list for client side processing
-    return str(file_data['rooms'][room_code]['players'])
+    return file_data['rooms'][room_code]
 
 @app.route('/get_players/<room_code>')
-@cross_origin(origin='*')
+@cross_origin()
 def get_players(room_code):
-    return str(file_data['rooms'][room_code]['players'])
+    return file_data['rooms'][room_code]
 
 if __name__ == '__main__':
     print(file_data)

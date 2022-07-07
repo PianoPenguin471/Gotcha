@@ -1,6 +1,6 @@
 import React from "react";
 import JoinGameScreen from "./JoinGameScreen";
-import LoadingScreen from "./LoadingScreen";
+import {LoadingScreen} from "./LoadingScreen";
 import QuestionScreen from "./QuestionScreen";
 
 const domain = "http://penguinboi.local/"
@@ -16,8 +16,8 @@ export default class App extends React.Component {
 
     joinRoom = (userName, daCode) => {
       console.log(`${userName} is joining room ${daCode}`);
-      fetch(domain + "join_room/" + userName + "/" + daCode).then(promise => {promise.json().then(json => {players = json.players})})
-      this.setState({currentScreen: "Loading"});
+      fetch(domain + "join_room/" + userName + "/" + daCode).then(promise => {promise.json().then(json => {console.log(json);this.players = json.players})})
+      this.setState({currentScreen: "Waiting"});
     }
 
     submitAnswer = (answer) => {
@@ -47,7 +47,7 @@ export default class App extends React.Component {
           alert("On question screen")
           return(<QuestionScreen name="Tim" question="If xxx were a superhero, what would be their Kryptonite?" onAnswer={this.submitAnswer}/>);
         case "Waiting":
-          return(<LoadingScreen players={this.players !== null ? this.players : null}/>);
+          return(<LoadingScreen playerUpdateUrl={domain + "get_players/" + this.state.roomCode}/>);
       }
     }
 }
