@@ -1,8 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native-web";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 export default class LoadingScreen extends React.Component {
     render() {
-        return(<View><Text style={styles.title}>Gotcha!</Text></View>);
+        return(
+        <View>
+            <Text style={styles.title}>Gotcha!</Text>
+            <Text>{this.props.players}</Text>
+            <ActivityIndicator color={"#f0a"} size={innerHeight / 2 - 50}/>
+        </View>
+        );
     }
 }
 const styles = StyleSheet.create({
@@ -13,5 +19,6 @@ const styles = StyleSheet.create({
       fontSize: 25,
       color: '#FFFF',
       fontWeight:'bold',
+      marginBottom: 30
   }
 });

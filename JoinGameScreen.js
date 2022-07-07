@@ -31,7 +31,7 @@ export default class JoinGameScreen extends React.Component {
           />
           </View>
 
-          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onJoin(this.state.name, this.state.code)}>
+          <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onJoin(this.state.name, this.state.code)}> // TODO figure out why this breaks
             <Text style = {styles.submitButtonText}> Join </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.submitButton} onPress = {() => this.props.onCreate(this.state.name)}>
